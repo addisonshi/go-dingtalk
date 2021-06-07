@@ -56,3 +56,12 @@ func (dtc *DingTalkClient) SNSGetUserInfo(snsToken string) (SNSGetUserInfoRespon
 	err := dtc.httpSNS("sns/getuserinfo", params, nil, &data)
 	return data, err
 }
+
+
+func (dtc *DingTalkClient) SNSGetUserInfoByCode(code string) (SNSGetUserInfoResponse, error) {
+	var data SNSGetUserInfoResponse
+	params := url.Values{}
+	params.Add("tmp_auth_code", code)
+	err := dtc.httpSNS("sns/getuserinfo_bycode", params, nil, &data)
+	return data, err
+}

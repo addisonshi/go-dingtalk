@@ -16,7 +16,7 @@ footer: MIT Licensed | Copyright © 2018-present icepy
 
 ``` bash
 # 安装
-$ go get -u github.com/icepy/go-dingtalk
+$ go get -u github.com/addisonshi/go-dingtalk
 ```
 
 ``` go
@@ -24,7 +24,7 @@ package main
 
 import (
 	"os"
-	"github.com/icepy/go-dingtalk/src"
+	"github.com/addisonshi/go-dingtalk/src"
 )
 
 func main() {

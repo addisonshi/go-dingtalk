@@ -1,6 +1,7 @@
 # DingTalk Golang SDK
 
 DingTalk Golang SDK https://github.com/icepy
+由于原SDK，停止更新，因此特意为了fork该SDK，感谢作者icepy的开源贡献。
 
 # Feature Overview
 
@@ -28,7 +29,7 @@ DingTalk Golang SDK https://github.com/icepy
 # Install
 
 ```bash
-~ ᐅ go get -u github.com/icepy/go-dingtalk
+~ ᐅ go get -u github.com/addisonshi/go-dingtalk
 ~ ᐅ go-dingtalk
 Current SDK VERSION=0.1
 Current SDK OAPIURL=https://oapi.dingtalk.com/
@@ -53,7 +54,7 @@ package main
 
 import (
   "os"
-  "github.com/icepy/go-dingtalk/src"
+  "github.com/addisonshi/go-dingtalk/src"
 )
 
 func main() {

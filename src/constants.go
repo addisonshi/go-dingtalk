@@ -22,7 +22,7 @@ const (
 	topFormat       = "json"
 	topV            = "2.0"
 	topSimplify     = false
-	topSecret       = "github.com/icepy"
+	topSecret       = "github.com/addisonshi"
 	topSignMethod   = signMD5
 	typeJSON        = "application/json"
 	typeForm        = "application/x-www-form-urlencoded"

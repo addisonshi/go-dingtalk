@@ -3,9 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
+	"go-dingtalk/src"
 	"os"
 
-	"github.com/icepy/go-dingtalk/src"
+	"github.com/addisonshi/go-dingtalk/src"
 )
 
 func main() {

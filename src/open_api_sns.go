@@ -1,7 +1,9 @@
 package dingtalk
 
 import (
+	"go-admin/tools"
 	"net/url"
+	"time"
 )
 
 type SNSGetPersistentCodeResponse struct {
@@ -61,7 +63,16 @@ func (dtc *DingTalkClient) SNSGetUserInfo(snsToken string) (SNSGetUserInfoRespon
 func (dtc *DingTalkClient) SNSGetUserInfoByCode(code string) (SNSGetUserInfoResponse, error) {
 	var data SNSGetUserInfoResponse
 	params := url.Values{}
-	params.Add("tmp_auth_code", code)
-	err := dtc.httpSNS("sns/getuserinfo_bycode", params, nil, &data)
+	timestamp := tools.Int64ToString(time.Now().Unix())
+
+	params.Add("accessKey", dtc.DTConfig.CorpID)
+	params.Add("timestamp", timestamp)
+	params.Add("signature", sha256Sign(timestamp, dtc.DTConfig.CorpSecret))
+
+	requestData := map[string]string{
+		"tmp_auth_code": code,
+	}
+
+	err := dtc.httpSNS("sns/getuserinfo_bycode", params, requestData, &data)
 	return data, err
 }

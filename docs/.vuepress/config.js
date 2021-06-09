@@ -10,7 +10,7 @@ module.exports = {
       ['guide/top_api', 'TOP']
     ],
     // 假定 GitHub。也可以是一个完整的 GitLab 网址
-    repo: 'icepy/go-dingtalk',
+    repo: 'addisonshi/go-dingtalk',
     // 如果你的文档不在仓库的根部
     docsDir: 'docs',
     // 可选，默认为 master

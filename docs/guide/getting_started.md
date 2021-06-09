@@ -3,7 +3,7 @@
 ## 安装
 
 ```bash
-$ go get -u github.com/icepy/go-dingtalk
+$ go get -u github.com/addisonshi/go-dingtalk
 ```
 
 ## 企业
@@ -17,7 +17,7 @@ package main
 
 import (
 	"os"
-	"github.com/icepy/go-dingtalk/src"
+	"github.com/addisonshi/go-dingtalk/src"
 )
 
 func main() {

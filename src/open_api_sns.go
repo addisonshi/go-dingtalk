@@ -63,7 +63,7 @@ func (dtc *DingTalkClient) SNSGetUserInfo(snsToken string) (SNSGetUserInfoRespon
 func (dtc *DingTalkClient) SNSGetUserInfoByCode(code string) (SNSGetUserInfoResponse, error) {
 	var data SNSGetUserInfoResponse
 	params := url.Values{}
-	timestamp := strconv.FormatInt(time.Now().Unix(), 10)
+	timestamp := strconv.FormatInt(time.Now().UnixNano() / 1000000, 10)
 
 	params.Add("accessKey", dtc.DTConfig.CorpID)
 	params.Add("timestamp", timestamp)

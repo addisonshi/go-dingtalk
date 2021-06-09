@@ -2,6 +2,7 @@ package dingtalk
 
 import (
 	"net/url"
+	"strconv"
 	"time"
 )
 
@@ -62,7 +63,7 @@ func (dtc *DingTalkClient) SNSGetUserInfo(snsToken string) (SNSGetUserInfoRespon
 func (dtc *DingTalkClient) SNSGetUserInfoByCode(code string) (SNSGetUserInfoResponse, error) {
 	var data SNSGetUserInfoResponse
 	params := url.Values{}
-	timestamp := tools.Int64ToString(time.Now().Unix())
+	timestamp := strconv.FormatInt(time.Now().Unix(), 10)
 
 	params.Add("accessKey", dtc.DTConfig.CorpID)
 	params.Add("timestamp", timestamp)

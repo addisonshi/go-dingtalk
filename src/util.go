@@ -4,11 +4,13 @@ import (
 	"crypto/hmac"
 	"crypto/sha1"
 	"crypto/sha256"
+	"encoding/base64"
 	"encoding/json"
 	"encoding/xml"
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"net/url"
 	"time"
 )
 
@@ -91,10 +93,14 @@ func sha256Sign(s string, secret string) string {
 	// to an existing byte slice: it usually isn't needed.
 	bs := h.Sum(nil)
 
-	// SHA1 values are often printed in hex, for example
-	// in git commits. Use the `%x` format verb to convert
-	// a hash results to a hex string.
-	return fmt.Sprintf("%x", bs)
+	message := base64.StdEncoding.EncodeToString(bs)
+
+	uv := url.Values{}
+	uv.Add("0", message)
+
+	result := uv.Encode()[2:]
+
+	return result
 }
 
 func HandJSONTopResponse(responseData interface{}, content []byte) {

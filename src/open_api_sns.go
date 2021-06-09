@@ -1,7 +1,6 @@
 package dingtalk
 
 import (
-	"go-admin/tools"
 	"net/url"
 	"time"
 )

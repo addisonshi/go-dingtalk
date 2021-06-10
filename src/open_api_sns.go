@@ -1,6 +1,9 @@
 package dingtalk
 
 import (
+	"crypto/hmac"
+	"crypto/sha256"
+	"encoding/base64"
 	"fmt"
 	"net/url"
 	"time"
@@ -65,8 +68,15 @@ func (dtc *DingTalkClient) SNSGetUserInfoByCode(code string) (SNSGetUserInfoResp
 	params := url.Values{}
 	timestamp := time.Now().UnixNano() / 1e6 //时间戳 毫秒
 	strTimeStamp := fmt.Sprintf("%d", timestamp)
-	signature := sha256Sign(strTimeStamp, dtc.DTConfig.CorpSecret)
-	signature = url.QueryEscape(signature)
+
+	fmt.Println("SNSSecret: ", dtc.DTConfig.SNSSecret)
+
+	key := []byte(dtc.DTConfig.SNSSecret)
+	h := hmac.New(sha256.New, key)
+	h.Write([]byte(strTimeStamp))
+	sha := h.Sum(nil)
+	sig := base64.StdEncoding.EncodeToString(sha)
+	signature := url.QueryEscape(sig)
 
 	params.Add("accessKey", dtc.DTConfig.CorpID)
 	params.Add("timestamp", strTimeStamp)
@@ -77,5 +87,6 @@ func (dtc *DingTalkClient) SNSGetUserInfoByCode(code string) (SNSGetUserInfoResp
 	}
 
 	err := dtc.httpSNS("sns/getuserinfo_bycode", params, requestData, &data)
+
 	return data, err
 }

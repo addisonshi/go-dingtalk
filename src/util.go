@@ -10,7 +10,6 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"net/url"
 	"time"
 )
 
@@ -93,14 +92,7 @@ func sha256Sign(s string, secret string) string {
 	// to an existing byte slice: it usually isn't needed.
 	bs := h.Sum(nil)
 
-	message := base64.StdEncoding.EncodeToString(bs)
-
-	uv := url.Values{}
-	uv.Add("0", message)
-
-	result := uv.Encode()[2:]
-
-	return result
+	return base64.StdEncoding.EncodeToString(bs)
 }
 
 func HandJSONTopResponse(responseData interface{}, content []byte) {

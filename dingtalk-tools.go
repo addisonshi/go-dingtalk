@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"go-dingtalk/src"
 	"os"
-
-	"github.com/addisonshi/go-dingtalk/src"
 )
 
 func main() {

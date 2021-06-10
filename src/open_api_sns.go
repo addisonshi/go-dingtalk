@@ -1,8 +1,8 @@
 package dingtalk
 
 import (
+	"fmt"
 	"net/url"
-	"strconv"
 	"time"
 )
 
@@ -63,11 +63,14 @@ func (dtc *DingTalkClient) SNSGetUserInfo(snsToken string) (SNSGetUserInfoRespon
 func (dtc *DingTalkClient) SNSGetUserInfoByCode(code string) (SNSGetUserInfoResponse, error) {
 	var data SNSGetUserInfoResponse
 	params := url.Values{}
-	timestamp := strconv.FormatInt(time.Now().UnixNano() / 1000000, 10)
+	timestamp := time.Now().UnixNano() / 1e6 //时间戳 毫秒
+	strTimeStamp := fmt.Sprintf("%d", timestamp)
+	signature := sha256Sign(strTimeStamp, dtc.DTConfig.CorpSecret)
+	signature = url.QueryEscape(signature)
 
 	params.Add("accessKey", dtc.DTConfig.CorpID)
-	params.Add("timestamp", timestamp)
-	params.Add("signature", sha256Sign(timestamp, dtc.DTConfig.CorpSecret))
+	params.Add("timestamp", strTimeStamp)
+	params.Add("signature", signature)
 
 	requestData := map[string]string{
 		"tmp_auth_code": code,

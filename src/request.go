@@ -189,7 +189,10 @@ func (dtc *DingTalkClient) httpRequest(tagType string, path interface{}, params 
 	client := dtc.HTTPClient
 
 	if tagType == "oapi" {
-		requestUrl = OAPIURL + path.(string) + "?" + params.Encode()
+		requestUrl = OAPIURL + path.(string)
+		if params != nil {
+			requestUrl = requestUrl + "?" + params.Encode()
+		}
 		fmt.Printf("requestUrl=%s\n", requestUrl)
 		if requestData != nil {
 			switch v := requestData.(type) {
